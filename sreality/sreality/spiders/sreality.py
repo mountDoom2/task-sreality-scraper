@@ -46,7 +46,7 @@ class SReality(scrapy.Spider):
         estates_json = response.json().get("_embedded", {}).get("estates", [])
         for estate in estates_json:
             name = estate.get("name")
-            url = next(iter(estate.get("_links", {}).get("images", []))).get("href")
+            url = next(iter(estate.get("_links", {}).get("images", [])), {}).get("href")
 
             if not name or not url:
                 logger.warning(
